@@ -20,7 +20,7 @@ export default function GalleryPreview({ images }: Props) {
             <div className="3xl:grid-cols-5 absolute inset-0 grid h-full -translate-y-15 grid-cols-4 gap-6">
                 {imageColumns.map((column, i) => (
                     <div key={i} className="flex flex-col gap-4">
-                        {column.map((image, j) => (
+                        {column.map((image) => (
                             <div key={image.fileName} className="rounded-lg">
                                 <Image quality={20} src={image.relativePath} alt={image.fileName} width={image.width / 4} height={image.height / 4} className="h-auto w-full rounded-lg" />
                             </div>
