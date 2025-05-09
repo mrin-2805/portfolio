@@ -114,6 +114,9 @@
     .boxSpacer {
         @apply px-4 py-10 md:py-15 lg:px-6 lg:py-20 2xl:px-10;
     }
+    .overlay {
+        @apply absolute inset-0 bg-black opacity-65;
+    }
 
     /* ---------------------------------- Text CSS  ---------------------------------------------- */
     /* SplitText */

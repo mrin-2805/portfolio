@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import BannerRole from "./_components/Animations/Banner/BannerRole";
 import SplitText from "./_components/Animations/Text/SplitText";
@@ -8,13 +9,15 @@ import { GetIcon } from "./_components/UI/Icons/GetIcon";
 import Career from "./_components/UI/Career";
 import Skills from "./_components/UI/Skills/Skills";
 import MagicCursor from "./_components/Animations/Canvas/MagicCursor";
+import ProfileImage from "@/public/images/mrinmayee.jpg";
+import ProfileImageTwo from "@/public/images/mrinmayee-2.jpg";
 
 export default async function HomePage() {
     return (
         <main id="main" className="relative z-1">
-            <section id="siteBanner" className="siteBanner relative">
+            <section id="siteBanner" className="siteBanner relative overflow-hidden">
                 <MagicCursor />
-                <div className="flex min-h-screen w-full items-center relative z-1">
+                <div className="relative z-1 flex min-h-screen w-full items-center">
                     <div className="boxSpacer flex w-full flex-col items-center justify-center gap-y-4">
                         <h1>
                             <SplitText text={"Hi! I'm Mrinmayee"} />
@@ -46,10 +49,18 @@ export default async function HomePage() {
                                 </p>
                             </div>
                         </div>
-                        <div className="bg-foreground col-span-full p-2 md:col-span-1"></div>
+                        <div className="col-span-full md:col-span-1">
+                            <div className="imageLoader">
+                                <Image src={ProfileImage} width="320" alt="Mrinmayee Profile" />
+                            </div>
+                        </div>
                         <div className="md:col-span-1"></div>
                         <div className="md:col-span-1 lg:hidden"></div>
-                        <div className="bg-foreground col-span-full min-h-20 p-2 md:col-span-1"></div>
+                        <div className="col-span-full md:col-span-1">
+                            <div className="imageLoader">
+                                <Image src={ProfileImageTwo} className="w-full" alt="Mrinmayee Profile" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </StickyBottom>

@@ -51,16 +51,10 @@ export default function Footer() {
                                 <GetIcon iconName="Mail" />
                             </div>
                         </Link>
-                        <Link href={"/contact"} className="border-background flex w-fit items-center rounded border p-2">
+                        <Link href={"https://www.linkedin.com/in/mrinmayee-ghanekar-354237189/"} target="_blank" className="border-background flex w-fit items-center rounded border p-2">
                             <div className="doubleTextBtn">
                                 <GetIcon iconName="LinkedIn" />
                                 <GetIcon iconName="LinkedIn" />
-                            </div>
-                        </Link>
-                        <Link href={"#"} className="border-background flex w-fit items-center rounded border p-2">
-                            <div className="doubleTextBtn">
-                                <GetIcon iconName="Behance" />
-                                <GetIcon iconName="Behance" />
                             </div>
                         </Link>
                     </div>

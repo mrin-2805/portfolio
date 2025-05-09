@@ -1,17 +1,17 @@
 import MagicCursor from "../_components/Animations/Canvas/MagicCursor";
-// import MaqueeMasonry from "../_components/Animations/Image/MaqueeMasonry";
+import GalleryPreview from "../_components/Animations/Image/GalleryPreview";
 import TitleBlock from "../_components/UI/TitleBlock";
-import { IWorks } from "../_lib/definations/works-definations";
-import { getWorks } from "../_lib/helpers/works";
+import { IWorks, IWorksImage } from "../_lib/definations/works-definations";
+import { generateMasonryItems, getWorks } from "../_lib/helpers/works";
 import Works from "./Works";
 
 const works: IWorks[] = await getWorks();
-// const images = generateMasonryItems(works);
+const images: IWorksImage[] = generateMasonryItems(works);
 
 export default async function PWorks() {
     return (
         <main id="main" className="relative z-1">
-            <section className="boxSpacer relative flex min-h-[75vh] w-full items-center justify-center">
+            <section className="boxSpacer relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden">
                 <MagicCursor />
                 <div className="relative z-2">
                     <h1 className="text-center">Works</h1>
@@ -24,9 +24,7 @@ export default async function PWorks() {
                     <Works works={works} />
                 </div>
             </section>
-            {/* <section className="h-120">
-                <MaqueeMasonry images={images} />
-            </section> */}
+            <GalleryPreview images={images} />
         </main>
     );
 }

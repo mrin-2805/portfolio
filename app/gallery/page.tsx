@@ -10,7 +10,7 @@ const masonryItems = generateMasonryItems(works);
 export default async function Gallery(): Promise<JSX.Element> {
     return (
         <main id="main" className="relative z-1">
-            <section className="relative flex min-h-[75vh] w-full items-center justify-center">
+            <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden">
                 <MagicCursor />
                 <div className="relative z-2">
                     <h1 className="text-center">Gallery</h1>

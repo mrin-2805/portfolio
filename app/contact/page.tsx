@@ -6,7 +6,7 @@ import MagicCursor from "../_components/Animations/Canvas/MagicCursor";
 export default async function PContact(): Promise<JSX.Element> {
     return (
         <main id="main" className="relative z-1">
-            <section className="relative flex min-h-[75vh] w-full items-center justify-center">
+            <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden">
                 <MagicCursor />
                 <div className="relative z-2">
                     <h1 className="text-center">Let&apos;s Work Together!</h1>
