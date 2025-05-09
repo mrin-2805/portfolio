@@ -9,9 +9,6 @@ import ClientJS from "./_components/UI/Common/ClientJS";
 export const metadata: Metadata = {
     title: "Mrinmayee",
     description: "Hey! I'm Mrinmayee this my personal portfolio as a Graphic Designer, Hope you like it!",
-    icons: {
-        icon: "/favicon.ico",
-    },
 };
 
 const headingsFont = localFont({
