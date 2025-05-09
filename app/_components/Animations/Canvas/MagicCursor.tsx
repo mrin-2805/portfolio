@@ -127,13 +127,13 @@ const MagicCursor = () => {
             mouseY = e.clientY;
         };
 
-        const handleTouchMove = (e: TouchEvent) => {
-            if (e.touches.length === 1) {
-                e.preventDefault();
-                mouseX = e.touches[0].pageX;
-                mouseY = e.touches[0].pageY;
-            }
-        };
+        // const handleTouchMove = (e: TouchEvent) => {
+        //     if (e.touches.length === 1) {
+        //         e.preventDefault();
+        //         mouseX = e.touches[0].pageX;
+        //         mouseY = e.touches[0].pageY;
+        //     }
+        // };
 
         createParticles();
         resizeCanvas();
@@ -143,8 +143,8 @@ const MagicCursor = () => {
         window.addEventListener("mousedown", () => (mouseIsDown = true));
         window.addEventListener("mouseup", () => (mouseIsDown = false));
         window.addEventListener("resize", resizeCanvas);
-        document.addEventListener("touchstart", handleTouchMove, { passive: false });
-        document.addEventListener("touchmove", handleTouchMove, { passive: false });
+        // document.addEventListener("touchstart", handleTouchMove, { passive: false });
+        // document.addEventListener("touchmove", handleTouchMove, { passive: false });
 
         return () => {
             clearInterval(interval);
@@ -152,8 +152,8 @@ const MagicCursor = () => {
             window.removeEventListener("mousedown", () => (mouseIsDown = true));
             window.removeEventListener("mouseup", () => (mouseIsDown = false));
             window.removeEventListener("resize", resizeCanvas);
-            document.removeEventListener("touchstart", handleTouchMove);
-            document.removeEventListener("touchmove", handleTouchMove);
+            // document.removeEventListener("touchstart", handleTouchMove);
+            // document.removeEventListener("touchmove", handleTouchMove);
         };
     }, []);
 

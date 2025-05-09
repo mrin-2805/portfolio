@@ -36,7 +36,7 @@ export default async function HomePage() {
 
             <StickyBottom>
                 <div className="boxSpacer bg-white">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-6">
                         <div className="col-span-full pb-6 lg:col-span-2 lg:pr-16">
                             <TitleBlock text="Profile" />
                             <h3>Experienced Graphic Designer with 4+ years in digital and print media, excelling in strategic content creation and innovative design solutions.</h3>
