@@ -1,42 +1,338 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+@theme {
+    /* Blush Pink - Rich Plum */
+    --color-background: #f5e4e7;
+    --color-foreground: #5d3754;
+
+    --breakpoint-3xl: 120rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer base {
+    body {
+        transition-property: opacity, transform, filter, background-color;
+        transition-timing-function: ease-in-out;
+        transition-duration: 500ms;
+    }
+
+    .page-transition {
+        opacity: 0;
+        background-color: var(--color-foreground);
+        transform: translateY(40px);
+        filter: blur(12px);
+    }
+
+    .bodyFont {
+        font-family: var(--bodyFont), Arial, Helvetica, sans-serif;
+    }
+    .headingsFont {
+        font-family: var(--headingsFont), Arial, Helvetica, sans-serif;
+    }
+    body {
+        font-family: var(--bodyFont), Arial, Helvetica, sans-serif;
+        @apply text-foreground bg-background;
+    }
+
+    body::-webkit-scrollbar,
+    body::-webkit-scrollbar-thumb {
+        @apply hidden;
+    }
+
+    section {
+        @apply bg-background relative z-1;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--headingsFont);
+    }
+
+    h1 {
+        @apply pb-3 text-4xl lg:text-7xl;
+    }
+
+    h2 {
+        @apply pb-3 text-3xl lg:text-5xl;
+    }
+
+    h3 {
+        @apply text-xl lg:text-3xl;
+    }
+
+    .pageLoader {
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        animation: pageloader 2s ease-in-out 0s 1 forwards;
+    }
+
+    @keyframes bannerText {
+        from {
+            filter: blur(5px);
+            opacity: 0;
+            transform: translateY(50%);
+        }
+        to {
+            filter: blur(0px);
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes bannerTextReverse {
+        from {
+            filter: blur(0px);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            filter: blur(5px);
+            opacity: 0;
+            transform: translateY(-50%);
+        }
+    }
+    @keyframes pageloader {
+        50% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        100% {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        }
+    }
+    @keyframes imageloader {
+        0% {
+            opacity: 0.35;
+        }
+        100% {
+            opacity: 0.05;
+        }
+    }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+@layer components {
+    body.scrolled header#site-header::before {
+        @apply !opacity-100;
+    }
+    .boxSpacer {
+        @apply px-4 py-10 md:py-15 lg:px-6 lg:py-20 2xl:px-10;
+    }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    /* ---------------------------------- Text CSS  ---------------------------------------------- */
+    /* SplitText */
+    .splitText {
+        @apply flex flex-wrap;
+    }
+    .splitWord {
+        @apply flex flex-nowrap;
+    }
+    /* ---------------------------------- Banner  ---------------------------------------------- */
+    /* Site Banner */
+    .siteBanner .splitText {
+        @apply items-center justify-center;
+    }
+    .siteBanner .splitWord {
+        @apply items-center justify-center;
+    }
+    .siteBanner .splitLetter {
+        display: inline-block;
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateY(50%);
+        animation: bannerText 0.3s cubic-bezier(0.37, 0.5, 0.92, 1.12) var(--delay) 1 forwards;
+    }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+    /* ---------------------------------- Buttons  ---------------------------------------------- */
+    /* Main Buttons */
+    .mainBtn {
+        @apply border-foreground relative inline-block w-80 max-w-full overflow-hidden rounded-3xl border border-solid bg-transparent px-7 py-2.5 text-center;
+    }
+    .mainBtn > * {
+        transition:
+            translate 0.35s ease-in-out,
+            opacity 0.3s ease-in;
+    }
+    .mainBtn:hover > *:first-child {
+        @apply -translate-y-5 opacity-0;
+    }
+    .mainBtn > *:last-child {
+        @apply text-background bg-foreground absolute inset-0 translate-y-full;
+    }
+    .mainBtn:hover > *:last-child {
+        @apply translate-y-0;
+    }
+    /* Split Button */
+    .splitBtn {
+        @apply relative inline-block overflow-hidden leading-none;
+    }
+    .splitBtn > .splitText {
+        @apply pointer-events-none select-none;
+    }
+    .splitBtn > .splitText .splitLetter {
+        transition: transform 0.25s ease-in-out 0s;
+    }
+    .splitBtn > .splitText:last-child {
+        @apply absolute inset-0;
+    }
+    .splitBtn > .splitText:first-child .splitLetter {
+        transform: translateY(0%);
+    }
+    .splitBtn > .splitText:last-child .splitLetter {
+        transform: translateY(100%);
+    }
+    .splitBtn:hover > .splitText:first-child .splitLetter {
+        transform: translateY(-100%);
+        transition: transform 0.25s ease-in-out var(--delay, 0s);
+    }
+    .splitBtn:hover > .splitText:last-child .splitLetter {
+        transform: translateY(0%);
+        transition: transform 0.25s ease-in-out var(--delay, 0s);
+    }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+    /* Double Text Btn */
+    .doubleTextBtn {
+        @apply relative inline-block overflow-hidden leading-none;
+    }
+    .doubleTextBtn > * {
+        @apply inline-block transition-[translate] duration-300;
+    }
+    .doubleTextBtn > *:last-child {
+        @apply absolute inset-0 translate-y-full;
+    }
+    a:hover .doubleTextBtn > *:first-child,
+    button:hover .doubleTextBtn > *:first-child {
+        @apply -translate-y-full;
+    }
+    a:hover .doubleTextBtn > *:last-child,
+    button:hover .doubleTextBtn > *:last-child {
+        @apply translate-y-0;
+    }
+    /* ---------------------------------- SplitDigit  ---------------------------------------------- */
+    .digitWrap {
+        height: var(--fontSize);
+    }
+    .allDigits {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+        transform: translateY(calc(0 * -1 * var(--fontSize)));
+        transition: transform 1s ease-in-out;
+    }
+    .digit {
+        width: 1ch;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--fontSize);
+    }
+    /* ---------------------------------- Skills  ---------------------------------------------- */
+    .skillBlockWrap .skillImg {
+        @apply brightness-0 transition-[filter] duration-300;
+    }
+    .skillBlockWrap.active .skillImg {
+        @apply brightness-100;
+    }
+    .skillBlockWrap .secondBlock {
+        @apply opacity-0 transition-opacity duration-300;
+    }
+    .skillBlockWrap .numberBlock {
+        font-size: 40px;
+    }
+    .skillBlockWrap.active .secondBlock {
+        @apply opacity-100;
+    }
+    .skillBlockWrap.active > .contentBlock {
+        color: var(--imageText, #fff);
+    }
+    .skillBlockWrap .allDigits {
+        font-weight: 600;
+    }
+    .skillBlockWrap.active .allDigits {
+        transform: translateY(calc(var(--value, 0) * -1 * var(--fontSize)));
+    }
+    .skillBlockWrap .iconBlock > svg {
+        @apply h-full w-full object-contain;
+    }
+    .skillBlockWrap .iconBlock > svg path {
+        stroke: var(--color-foreground);
+        stroke-dasharray: 307.919, 307.919;
+        stroke-dashoffset: 307.919;
+        stroke-width: 4px;
+        -webkit-transition: stroke-dashoffset 0.7s linear 0s;
+        -o-transition: stroke-dashoffset 0.7s linear 0s;
+        transition: stroke-dashoffset 0.7s linear 0s;
+    }
+    .skillBlockWrap.active .iconBlock svg path {
+        stroke-dashoffset: var(--skillLevel);
+    }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+    /* ---------------------------------- Input CSS  ---------------------------------------------- */
+    .inputWrapper {
+        @apply relative mb-4 w-full;
+    }
+    .inputWrapper .label {
+        @apply pointer-events-none absolute top-3 left-9 z-1 px-1 opacity-0;
+        transition:
+            background-color 0.1s ease-in-out,
+            opacity 0.4s ease-in-out,
+            top 0.4s ease-in-out,
+            font-size 0.4s ease-in-out;
+    }
+    .inputWrapper.selected select ~ .label,
+    .inputWrapper input:focus ~ .label,
+    .inputWrapper input:not(:placeholder-shown) ~ .label,
+    .inputWrapper textarea:focus ~ .label,
+    .inputWrapper textarea:not(:placeholder-shown) ~ .label {
+        @apply -top-2 bg-white text-xs opacity-100;
+        transition:
+            opacity 0.1s ease-in-out,
+            top 0.4s ease-in-out,
+            background-color 0.4s ease-in-out,
+            font-size 0.4s ease-in-out;
+    }
+    .inputWrapper .iconWrapper {
+        @apply absolute left-3;
+    }
+    .inputWrapper input,
+    .inputWrapper select,
+    .inputWrapper textarea {
+        @apply border-foreground bg-background w-full rounded border border-solid py-2.5 pr-2 pl-10 transition-colors duration-500 outline-none;
+    }
+    .inputWrapper input:disabled,
+    .inputWrapper textarea:disabled,
+    .inputWrapper select:disabled {
+        @apply bg-background;
+    }
+    .inputWrapper input:focus,
+    .inputWrapper input:not(:placeholder-shown),
+    .inputWrapper textarea:focus,
+    .inputWrapper textarea:not(:placeholder-shown),
+    .inputWrapper.selected select {
+        @apply bg-transparent;
+    }
+    .inputWrapper input:focus::placeholder,
+    .inputWrapper textarea:focus::placeholder {
+        @apply opacity-0 transition-opacity duration-400;
+    }
+    .input-error {
+        @apply text-xs text-red-600;
+    }
+    .submission-success {
+        @apply border-foreground mt-4 rounded border p-2 text-center;
+    }
+    .submission-fail {
+        @apply mt-4 rounded border border-red-600 p-2 text-center text-red-600;
+    }
+    /* ---------------------------------- Input CSS End  ---------------------------------------------- */
+
+    .footerContactIcon::before {
+        @apply border-background bg-foreground pointer-events-none absolute inset-0 rounded-full border content-[""];
+    }
+
+    /* ---------------------------------- Image Loader  ---------------------------------------------- */
+    .imageLoader {
+        @apply relative overflow-hidden;
+    }
+    .imageLoader::before {
+        animation: imageloader 1s ease-in-out 0s infinite alternate-reverse;
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+        @apply absolute inset-0 -z-1 bg-black content-[""];
+    }
 }
