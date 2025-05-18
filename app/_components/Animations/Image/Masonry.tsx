@@ -15,9 +15,9 @@ export default function Masonry({ images }: Props) {
                     infinite: false,
                 },
             }}>
-            <div className="3xl:columns-5 w-full columns-2 gap-3 space-y-4 lg:columns-3 lg:gap-6 lg:space-y-6 2xl:columns-4">
+            <div className="3xl:columns-6 w-full columns-2 gap-3 space-y-4 lg:columns-3 lg:gap-6 lg:space-y-6 2xl:columns-5">
                 {images.map((image, index) => (
-                    <div key={image.relativePath} className="imageLoader break-inside-avoid rounded-lg">
+                    <div key={image.relativePath} className="imageLoader break-inside-avoid rounded-lg">    
                         <Link href={image.relativePath} data-fancybox={"gallery"}>
                             <Image
                                 src={image.relativePath}

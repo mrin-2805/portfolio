@@ -47,12 +47,14 @@ export default function InViewClippy({ children, className = "", index = 0, dire
     };
 
     const clipPath = isVisible ? "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" : hiddenClipPaths[direction || "bottom"];
+    const transform = isVisible ? "scale(1)" : "scale(1.7)";
 
     const style: CSSProperties = {
         clipPath,
+        transform,
         WebkitClipPath: clipPath,
-        willChange: "clip-path",
-        transition: "clip-path 1s ease-in-out",
+        willChange: "clip-path,transform",
+        transition: "clip-path 1s ease-in-out, transform 1s ease-in-out",
     };
 
     return (

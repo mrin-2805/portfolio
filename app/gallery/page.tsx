@@ -3,6 +3,7 @@ import { IWorks } from "../_lib/definations/works-definations";
 import { getWorks, generateMasonryItems } from "../_lib/helpers/works";
 import Masonry from "../_components/Animations/Image/Masonry";
 import MagicCursor from "../_components/Animations/Canvas/MagicCursor";
+import WorksPreview from "../_components/UI/Preview/WorksPreview";
 
 const works: IWorks[] = await getWorks();
 const masonryItems = generateMasonryItems(works);
@@ -19,7 +20,7 @@ export default async function Gallery(): Promise<JSX.Element> {
             <section className="boxSpacer bg-foreground text-background">
                 <Masonry images={masonryItems} />
             </section>
-            <section className="boxSpacer"></section>
+            <WorksPreview works={works} />
         </main>
     );
 }

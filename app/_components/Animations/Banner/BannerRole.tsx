@@ -28,8 +28,8 @@ export default function BannerRole() {
     }, [currentIndex, currentRole]);
 
     return (
-        <h1>
+        <h2>
             <SplitText staggerDuration={0.08} text={currentRole} />
-        </h1>
+        </h2>
     );
 }

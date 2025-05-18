@@ -1,6 +1,6 @@
-import { WebsiteContent } from "./_lib/definations/content-definations";
+import { IWebsiteContent } from "./_lib/definations/content-definations";
 
-export const websiteContent: WebsiteContent = {
+export const websiteContent: IWebsiteContent = {
     roles: ["Visual Designer", "Brand Designer", "Social Media Marketing Expert", "Social Media Campaign Strategist", "Facebook Marketing Specialist", "Instagram Marketing Specialist", "Social Media Analytics", "Visual Content Creator"],
     careers: [
         {

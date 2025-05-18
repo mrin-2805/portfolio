@@ -5,7 +5,8 @@ import { IWorks, IWorksImage } from "@/app/_lib/definations/works-definations";
 import { generateMasonryItems, getWorks } from "@/app/_lib/helpers/works";
 import Masonry from "@/app/_components/Animations/Image/Masonry";
 import MagicCursor from "@/app/_components/Animations/Canvas/MagicCursor";
-import GalleryPreview from "@/app/_components/Animations/Image/GalleryPreview";
+import GalleryPreview from "@/app/_components/UI/Preview/GalleryPreview";
+import SplitText from "@/app/_components/Animations/Text/SplitText";
 
 export async function generateStaticParams() {
     const works: IWorks[] = await getWorks();
@@ -29,10 +30,12 @@ export default async function PWork({ params }: { params: Promise<{ work: string
 
     return (
         <main id="main" className="relative z-1">
-            <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden">
+            <section className="siteBanner relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden">
                 <MagicCursor />
                 <div className="relative z-2">
-                    <h1 className="text-center">{work.client}</h1>
+                    <h1 className="text-center">
+                        <SplitText text={work.client} />
+                    </h1>
                 </div>
             </section>
             <section id="works" className="boxSpacer bg-foreground text-background">

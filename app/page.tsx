@@ -22,11 +22,11 @@ export default async function HomePage() {
                         <h1>
                             <SplitText text={"Hi! I'm Mrinmayee"} />
                         </h1>
-                        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-4">
+                        <div className="flex flex-wrap items-end justify-center gap-x-2 gap-y-4">
                             <h1>
                                 <SplitText text={"I'm a"} />
                             </h1>
-                            <div className="bg-foreground text-background inline-block rounded px-2 pt-2 pb-4">
+                            <div className="bg-foreground text-background inline-block rounded p-2">
                                 <BannerRole />
                             </div>
                         </div>

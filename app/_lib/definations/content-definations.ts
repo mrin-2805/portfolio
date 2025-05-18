@@ -12,7 +12,7 @@ export interface ISkill {
     level: number;
 };
 
-export interface WebsiteContent {
+export interface IWebsiteContent {
     roles: string[];
     careers: ICareer[];
     skills: ISkill[];

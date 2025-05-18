@@ -30,7 +30,7 @@ export default function FooterSwiper({ reverseDirection }: Props) {
             {roles.length &&
                 roles.map((role) => (
                     <SwiperSlide key={role} className="flex !w-fit uppercase">
-                        <h1 className="bodyFont pb-0 font-bold text-nowrap select-none">{role} |</h1>
+                        <h2 className="bodyFont pb-0 font-bold text-nowrap select-none">{role} |</h2>
                     </SwiperSlide>
                 ))}
         </Swiper>
