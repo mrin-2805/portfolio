@@ -13,23 +13,39 @@ function getTextDuration(text: string, delayPerLetter = 100): number {
 
 export default function BannerRole() {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [currentRole, setCurrentRole] = useState<string>(roles[0]);
 
     useEffect(() => {
-        const duration = getTextDuration(currentRole);
+        const duration = getTextDuration(roles[currentIndex]);
 
         const timeout = setTimeout(() => {
-            const nextIndex = (currentIndex + 1) % roles.length;
-            setCurrentIndex(nextIndex);
-            setCurrentRole(roles[nextIndex]);
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
         }, duration);
 
         return () => clearTimeout(timeout);
-    }, [currentIndex, currentRole]);
+    }, [currentIndex]);
+
+    const handleBulletClick = (index: number) => {
+        setCurrentIndex(index);
+    };
 
     return (
-        <h2>
-            <SplitText staggerDuration={0.08} text={currentRole} />
-        </h2>
+        <div className="roles-wrap relative text-center">
+            <div className="bg-foreground text-background inline-block rounded p-2">
+                <h2>
+                    <SplitText staggerDuration={0.08} text={roles[currentIndex]} />
+                </h2>
+            </div>
+
+            <div className="absolute -bottom-5 flex w-full flex-wrap justify-center gap-2">
+                {roles.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleBulletClick(index)}
+                        className={`h-2 w-2 rounded-full transition-opacity duration-300 ${currentIndex === index ? "bg-foreground scale-125" : "bg-foreground opacity-50"}`}
+                        aria-label={`Switch to role ${index + 1}`}
+                    />
+                ))}
+            </div>
+        </div>
     );
 }

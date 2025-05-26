@@ -19,7 +19,7 @@ export default async function PContact(): Promise<JSX.Element> {
                     <div className="w-full">
                         <div className="text-justify">
                             <p>
-                                I&apos;m open and available to take on new projects. Whether you have a specific project in mind or need expert advice, I&apos;m team is here to assist you. Don&apos;t hesitate to drop us a line via email or
+                                I&apos;m open and available to take on new projects. Whether you have a specific project in mind or need expert advice, I&apos;m here to assist you. Don&apos;t hesitate to drop us a line via email or
                                 fill out the form I&apos;ll get back to you ASAP. I look forward to collaborating with you!
                             </p>
                         </div>

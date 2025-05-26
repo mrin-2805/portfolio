@@ -94,7 +94,7 @@ export default function ContactForm() {
                 label={"Message"}
                 iconName={"Message"}
             />
-            <button disabled={formState.pending} type="submit" name="button" className="mainBtn mx-auto block cursor-pointer disabled:cursor-not-allowed disabled:opacity-80">
+            <button disabled={formState.pending} type="submit" name="button" className="mainBtn mx-auto block disabled:cursor-not-allowed disabled:opacity-80">
                 <span className="flex items-center justify-center">{formState.pending ? "Loading..." : "Confirm"}</span>
                 <span className="flex items-center justify-center">{formState.pending ? "Loading..." : "Confirm"}</span>
             </button>

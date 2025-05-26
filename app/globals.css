@@ -9,25 +9,16 @@
 }
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         transition-property: opacity, transform, filter, background-color;
         transition-timing-function: ease-in-out;
         transition-duration: 500ms;
     }
 
-    .page-transition {
-        opacity: 0;
-        background-color: var(--color-foreground);
-        transform: translateY(40px);
-        filter: blur(12px);
-    }
-
-    .bodyFont {
-        font-family: var(--bodyFont), Arial, Helvetica, sans-serif;
-    }
-    .headingsFont {
-        font-family: var(--headingsFont), Arial, Helvetica, sans-serif;
-    }
     body {
         font-family: var(--bodyFont), Arial, Helvetica, sans-serif;
         @apply text-foreground bg-background;
@@ -60,6 +51,21 @@
         @apply text-xl lg:text-3xl;
     }
 
+    .page-transition {
+        opacity: 0;
+        background-color: var(--color-foreground);
+        transform: translateY(40px);
+        filter: blur(12px);
+    }
+
+    .bodyFont {
+        font-family: var(--bodyFont), Arial, Helvetica, sans-serif;
+    }
+
+    .headingsFont {
+        font-family: var(--headingsFont), Arial, Helvetica, sans-serif;
+    }
+
     .pageLoader {
         clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
         animation: pageloader 2s ease-in-out 0s 1 forwards;
@@ -71,36 +77,29 @@
             opacity: 0;
             transform: translateY(50%);
         }
+
         to {
             filter: blur(0px);
             opacity: 1;
             transform: translateY(0);
         }
     }
-    @keyframes bannerTextReverse {
-        from {
-            filter: blur(0px);
-            opacity: 1;
-            transform: translateY(0);
-        }
-        to {
-            filter: blur(5px);
-            opacity: 0;
-            transform: translateY(-50%);
-        }
-    }
+
     @keyframes pageloader {
         50% {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
+
         100% {
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         }
     }
+
     @keyframes imageloader {
         0% {
             opacity: 0.35;
         }
+
         100% {
             opacity: 0.05;
         }
@@ -111,29 +110,67 @@
     body.scrolled header#site-header::before {
         @apply !opacity-100;
     }
+
     .boxSpacer {
         @apply px-4 py-10 md:py-15 lg:px-6 lg:py-20 2xl:px-10;
     }
+
     .overlay {
         @apply absolute inset-0 bg-black opacity-65;
     }
+
+    /* ---------------------------------- Header  CSS---------------------------------------------- */
+    .backToTop {
+        position: fixed;
+        right: 0;
+        bottom: 5%;
+        z-index: 29;
+        border-radius: 50%;
+        display: inline-block;
+        transform: scale(0);
+        transform-origin: center;
+        outline: 1px solid var(--color-foreground);
+        background-color: var(--color-background);
+        border: 1px solid var(--color-background);
+        transition: transform .3s ease-in, right .3s ease-in;
+        will-change: border, transform, outline;
+    }
+
+    .backToTop>svg {
+        stroke: var(--color-foreground);
+        stroke-width: 4px;
+        transition: stroke-dashoffset 10ms linear 0s;
+        stroke-dasharray: 307.919, 307.919;
+        stroke-dashoffset: calc((var(--scrollPercentage) * 307.919) / 100);
+    }
+
+    body.scrolled .backToTop {
+        transform: scale(1);
+        right: 5%;
+    }
+
+    /* ---------------------------------- Header CSS END  ---------------------------------------------- */
 
     /* ---------------------------------- Text CSS  ---------------------------------------------- */
     /* SplitText */
     .splitText {
         @apply flex flex-wrap;
     }
+
     .splitWord {
         @apply flex flex-nowrap;
     }
+
     /* ---------------------------------- Banner  ---------------------------------------------- */
     /* Site Banner */
     .siteBanner .splitText {
         @apply items-center justify-center;
     }
+
     .siteBanner .splitWord {
         @apply items-center justify-center;
     }
+
     .siteBanner .splitLetter {
         display: inline-block;
         opacity: 0;
@@ -143,48 +180,64 @@
     }
 
     /* ---------------------------------- Buttons  ---------------------------------------------- */
+    button {
+        @apply cursor-pointer;
+    }
+
     /* Main Buttons */
     .mainBtn {
         @apply border-foreground relative inline-block w-80 max-w-full overflow-hidden rounded-3xl border border-solid bg-transparent px-7 py-2.5 text-center;
     }
-    .mainBtn > * {
+
+    .mainBtn>* {
         transition:
             translate 0.35s ease-in-out,
             opacity 0.3s ease-in;
     }
-    .mainBtn:hover > *:first-child {
+
+    .mainBtn:hover>*:first-child {
         @apply -translate-y-5 opacity-0;
     }
-    .mainBtn > *:last-child {
+
+    .mainBtn>*:last-child {
         @apply text-background bg-foreground absolute inset-0 translate-y-full;
     }
-    .mainBtn:hover > *:last-child {
+
+    .mainBtn:hover>*:last-child {
         @apply translate-y-0;
     }
+
     /* Split Button */
     .splitBtn {
         @apply relative inline-block overflow-hidden leading-none;
     }
-    .splitBtn > .splitText {
+
+    .splitBtn>.splitText {
         @apply pointer-events-none select-none;
     }
-    .splitBtn > .splitText .splitLetter {
+
+    .splitBtn>.splitText .splitLetter {
         transition: transform 0.25s ease-in-out 0s;
     }
-    .splitBtn > .splitText:last-child {
+
+    .splitBtn>.splitText:last-child {
         @apply absolute inset-0;
     }
-    .splitBtn > .splitText:first-child .splitLetter {
+
+    .splitBtn>.splitText:first-child .splitLetter {
         transform: translateY(0%);
     }
-    .splitBtn > .splitText:last-child .splitLetter {
+
+    .splitBtn>.splitText:last-child .splitLetter {
         transform: translateY(100%);
     }
-    .splitBtn:hover > .splitText:first-child .splitLetter {
+
+    .splitBtn:hover>.splitText:first-child .splitLetter {
         transform: translateY(-100%);
         transition: transform 0.25s ease-in-out var(--delay, 0s);
     }
-    .splitBtn:hover > .splitText:last-child .splitLetter {
+
+    .splitBtn:hover>.splitText:last-child .splitLetter {
         transform: translateY(0%);
         transition: transform 0.25s ease-in-out var(--delay, 0s);
     }
@@ -193,24 +246,30 @@
     .doubleTextBtn {
         @apply relative inline-block overflow-hidden leading-none;
     }
-    .doubleTextBtn > * {
+
+    .doubleTextBtn>* {
         @apply inline-block transition-[translate] duration-300;
     }
-    .doubleTextBtn > *:last-child {
+
+    .doubleTextBtn>*:last-child {
         @apply absolute inset-0 translate-y-full;
     }
-    a:hover .doubleTextBtn > *:first-child,
-    button:hover .doubleTextBtn > *:first-child {
+
+    a:hover .doubleTextBtn>*:first-child,
+    button:hover .doubleTextBtn>*:first-child {
         @apply -translate-y-full;
     }
-    a:hover .doubleTextBtn > *:last-child,
-    button:hover .doubleTextBtn > *:last-child {
+
+    a:hover .doubleTextBtn>*:last-child,
+    button:hover .doubleTextBtn>*:last-child {
         @apply translate-y-0;
     }
+
     /* ---------------------------------- SplitDigit  ---------------------------------------------- */
     .digitWrap {
         height: var(--fontSize);
     }
+
     .allDigits {
         display: flex;
         flex-direction: column;
@@ -218,6 +277,7 @@
         transform: translateY(calc(0 * -1 * var(--fontSize)));
         transition: transform 1s ease-in-out;
     }
+
     .digit {
         width: 1ch;
         display: flex;
@@ -225,35 +285,45 @@
         justify-content: center;
         font-size: var(--fontSize);
     }
+
     /* ---------------------------------- Skills  ---------------------------------------------- */
     .skillBlockWrap .skillImg {
         @apply brightness-0 transition-[filter] duration-300;
     }
+
     .skillBlockWrap.active .skillImg {
         @apply brightness-100;
     }
+
     .skillBlockWrap .secondBlock {
         @apply opacity-0 transition-opacity duration-300;
     }
+
     .skillBlockWrap .numberBlock {
         font-size: 40px;
     }
+
     .skillBlockWrap.active .secondBlock {
         @apply opacity-100;
     }
-    .skillBlockWrap.active > .contentBlock {
+
+    .skillBlockWrap.active>.contentBlock {
         color: var(--imageText, #fff);
     }
+
     .skillBlockWrap .allDigits {
         font-weight: 600;
     }
+
     .skillBlockWrap.active .allDigits {
         transform: translateY(calc(var(--value, 0) * -1 * var(--fontSize)));
     }
-    .skillBlockWrap .iconBlock > svg {
+
+    .skillBlockWrap .iconBlock>svg {
         @apply h-full w-full object-contain;
     }
-    .skillBlockWrap .iconBlock > svg path {
+
+    .skillBlockWrap .iconBlock>svg path {
         stroke: var(--color-foreground);
         stroke-dasharray: 307.919, 307.919;
         stroke-dashoffset: 307.919;
@@ -262,6 +332,7 @@
         -o-transition: stroke-dashoffset 0.7s linear 0s;
         transition: stroke-dashoffset 0.7s linear 0s;
     }
+
     .skillBlockWrap.active .iconBlock svg path {
         stroke-dashoffset: var(--skillLevel);
     }
@@ -270,6 +341,7 @@
     .inputWrapper {
         @apply relative mb-4 w-full;
     }
+
     .inputWrapper .label {
         @apply pointer-events-none absolute top-3 left-9 z-1 px-1 opacity-0;
         transition:
@@ -278,11 +350,12 @@
             top 0.4s ease-in-out,
             font-size 0.4s ease-in-out;
     }
-    .inputWrapper.selected select ~ .label,
-    .inputWrapper input:focus ~ .label,
-    .inputWrapper input:not(:placeholder-shown) ~ .label,
-    .inputWrapper textarea:focus ~ .label,
-    .inputWrapper textarea:not(:placeholder-shown) ~ .label {
+
+    .inputWrapper.selected select~.label,
+    .inputWrapper input:focus~.label,
+    .inputWrapper input:not(:placeholder-shown)~.label,
+    .inputWrapper textarea:focus~.label,
+    .inputWrapper textarea:not(:placeholder-shown)~.label {
         @apply -top-2 bg-white text-xs opacity-100;
         transition:
             opacity 0.1s ease-in-out,
@@ -290,19 +363,23 @@
             background-color 0.4s ease-in-out,
             font-size 0.4s ease-in-out;
     }
+
     .inputWrapper .iconWrapper {
         @apply absolute left-3;
     }
+
     .inputWrapper input,
     .inputWrapper select,
     .inputWrapper textarea {
         @apply border-foreground bg-background w-full rounded border border-solid py-2.5 pr-2 pl-10 transition-colors duration-500 outline-none;
     }
+
     .inputWrapper input:disabled,
     .inputWrapper textarea:disabled,
     .inputWrapper select:disabled {
         @apply bg-background;
     }
+
     .inputWrapper input:focus,
     .inputWrapper input:not(:placeholder-shown),
     .inputWrapper textarea:focus,
@@ -310,19 +387,24 @@
     .inputWrapper.selected select {
         @apply bg-transparent;
     }
+
     .inputWrapper input:focus::placeholder,
     .inputWrapper textarea:focus::placeholder {
         @apply opacity-0 transition-opacity duration-400;
     }
+
     .input-error {
         @apply text-xs text-red-600;
     }
+
     .submission-success {
         @apply border-foreground mt-4 rounded border p-2 text-center;
     }
+
     .submission-fail {
         @apply mt-4 rounded border border-red-600 p-2 text-center text-red-600;
     }
+
     /* ---------------------------------- Input CSS End  ---------------------------------------------- */
 
     .footerContactIcon::before {
@@ -333,6 +415,7 @@
     .imageLoader {
         @apply relative overflow-hidden;
     }
+
     .imageLoader::before {
         animation: imageloader 1s ease-in-out 0s infinite alternate-reverse;
         /* animation: name duration timing-function delay iteration-count direction fill-mode; */

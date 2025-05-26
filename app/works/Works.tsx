@@ -24,7 +24,7 @@ export default async function Works({ works }: { works: IWorks[] }) {
                                     <div className={`flex w-full items-center justify-between gap-5 px-4 py-7 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
                                         <div className="">
                                             {/* <InviewCounter fontSize={45} countNumber={index + 1} minDigits={2} /> */}
-                                            <h1>{index + 1}</h1>
+                                            <h1>{index + 1 < 10 ? "0" + (index + 1) : index + 1}</h1>
                                         </div>
                                         <p className="text-3xl lg:text-5xl">{work.client}</p>
                                     </div>
